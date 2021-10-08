@@ -1,10 +1,46 @@
-import { Container } from './styled';
+import { useState } from "react";
 import React from "react";
 
-export default function carrinho (){
-    return(
-        <Container>
-            <div> ola </div>
-        </Container>
+import Contador from '../contador'
+import { Container, RemoverIcon } from './styled'
+
+export default function CarrinhoItem(props) {
+    const [produto, setProduto] = useState(props.info);
+  
+    function alterarQtd(qtd) {
+      setProduto({...produto, qtd });
+  
+      props.onUpdate(produto.id, qtd)
+    }
+  
+    function remover() {
+      props.onRemove(produto.id);
+    }
+  
+    return (
+      <Container>
+        
+        <div>
+          <img className="capa" src={produto.imagem} alt="" />
+          <Contador onChange={alterarQtd} value={produto.qtd} />
+        </div>
+  
+        <div className="nome"> 
+          {produto.nome} 
+        </div>
+        
+        <div className="preco"> 
+          <span>Preço unitário</span>
+          {produto.preco} 
+        </div>
+  
+        <div className="qtd"> 
+          <span>Qtd</span> 
+          {produto.qtd} 
+        </div>
+  
+        <div className="remover"> <RemoverIcon onClick={remover} /> </div>
+  
+      </Container>
     )
-}
+  }

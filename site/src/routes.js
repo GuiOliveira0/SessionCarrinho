@@ -1,6 +1,7 @@
 import { BrowserRouter, Switch, Route} from 'react-router-dom';
 
 import Home from "./pages/home";
+import Detalhes from "./pages/carrinho";
 
 export default function Routes(){
     return(
